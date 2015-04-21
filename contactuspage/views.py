@@ -15,8 +15,10 @@ from multisitesutils import preferences
 
 from .models import Topic, Message
 from .forms import (MessageTopicForm, ReplyForm, TopicForm)
-from .helpers import username_generator, send_user_notification
-from .mixins import ContactusAdminMixin, CanReplyMixin, is_contactus_admin
+from .helpers import (username_generator,
+                      get_send_user_notification,
+                      get_is_contactus_admin, )
+from .mixins import ContactusAdminMixin, CanReplyMixin
 
 User = get_user_model()
 
@@ -56,9 +58,9 @@ class MessageTopicCreateView(CreateView):
             subject = "%s - Notification" % current_site.domain
             data = {'domain': current_site.domain}
 
-            send_user_notification("email_notify_owner",
-                                   data, subject,
-                                   [contactus_settings.email_to], None)
+            get_send_user_notification("email_notify_owner",
+                                       data, subject,
+                                       [contactus_settings.email_to], None)
 
         return HttpResponseRedirect(self.get_success_url())
 
@@ -95,7 +97,7 @@ class ReplyView(CanReplyMixin, CreateView):
         instance.topic = self.topic
         instance.author = self.author
         instance.save()
-        contactus_admin = is_contactus_admin(self.request)
+        contactus_admin = get_is_contactus_admin(self.request)
 
         if contactus_admin:
             topic = instance.topic
@@ -116,16 +118,16 @@ class ReplyView(CanReplyMixin, CreateView):
                         'name': self.topic.author.first_name,
                         'reply_url': self.topic.messages_url}
 
-                send_user_notification("email_notify_author",
-                                       data, subject,
-                                       [self.topic.author.email], None)
+                get_send_user_notification("email_notify_author",
+                                           data, subject,
+                                           [self.topic.author.email], None)
 
             else:
                 # email the site owner
                 data = {'domain': current_site.domain}
-                send_user_notification("email_notify_owner",
-                                       data, subject,
-                                       [contactus_settings.email_to], None)
+                get_send_user_notification("email_notify_owner",
+                                           data, subject,
+                                           [contactus_settings.email_to], None)
 
         return redirect(instance.topic_url)
 

@@ -3,9 +3,12 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 import time
+import importlib
 from hashlib import sha1, sha224
 
 from django.utils.text import slugify
+from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 
 
 def topic_key_generator(author_mail):
@@ -21,19 +24,37 @@ def username_generator(name, email, hash_limit=10):
     return username_hash
 
 
-def is_contactus_admin(request):
-    # TODO - make possible to customize this method by the user
-    if request.user.is_authenticated():
-        if request.user.is_staff or request.user.is_superuser:
-            return True
-    return False
+def get_is_contactus_admin(request):
+    """
+        Returns the user's defined method for who is contactus page admin
+    """
+    is_contactus_admin = getattr(settings,
+                                 "CONTACTUS_PAGE_IS_ADMIN_METHOD", None)
+    if not is_contactus_admin:
+        raise ImproperlyConfigured(
+            'The settings.CONTACTUS_PAGE_IS_ADMIN_METHOD parameter is not defined.')
+    module_name, method_name = is_contactus_admin.rsplit('.', 1)
+    module = importlib.import_module(module_name)
+    method_result = getattr(module, method_name)(request)
+    return method_result
 
 
-def send_user_notification(message_type, data, subject, email_to, reply_to):
-    # TODO - make possible to customize this method by the user
-    print "--> [{0}] using {1}, sending {2} to: {3} (reply_to {4}".format(
-        message_type,
-        data,
-        subject,
-        email_to,
-        reply_to)
+def get_send_user_notification(message_type,
+                               data,
+                               subject,
+                               email_to, reply_to):
+    """
+        Returns the user's defined method for sending notifications
+    """
+    send_user_notification = getattr(settings,
+                                     "CONTACTUS_PAGE_SEND_USER_NOTIFICATION_METHOD", None)
+    if not send_user_notification:
+        raise ImproperlyConfigured(
+            'The settings.CONTACTUS_PAGE_SEND_USER_NOTIFICATION_METHOD parameter is not defined.')
+    module_name, method_name = send_user_notification.rsplit('.', 1)
+    module = importlib.import_module(module_name)
+    method_result = getattr(module, method_name)(message_type,
+                                                 data,
+                                                 subject,
+                                                 email_to, reply_to)
+    return method_result

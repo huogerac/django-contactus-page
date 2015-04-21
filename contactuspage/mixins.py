@@ -6,7 +6,7 @@ from django.http import HttpResponseForbidden
 from django.contrib.auth import get_user_model
 
 from .models import Topic
-from .helpers import is_contactus_admin
+from .helpers import get_is_contactus_admin
 
 User = get_user_model()
 
@@ -48,7 +48,7 @@ class CanReplyMixin(object):
 
     def get_context_data(self, **kwargs):
         context = super(CanReplyMixin, self).get_context_data(**kwargs)
-        context['is_contactus_admin'] = is_contactus_admin(self.request)
+        context['is_contactus_admin'] = get_is_contactus_admin(self.request)
         return context
 
     def dispatch(self, request, *args, **kws):
@@ -64,7 +64,7 @@ class CanReplyMixin(object):
 class ContactusAdminMixin(object):
 
     def dispatch(self, request, *args, **kws):
-        if not is_contactus_admin(request):
+        if not get_is_contactus_admin(request):
             HttpResponseForbidden('you can not access this page')
 
         return super(ContactusAdminMixin, self).dispatch(
