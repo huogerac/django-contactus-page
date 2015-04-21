@@ -1,0 +1,47 @@
+{% extends 'contactuspage/base_accounts.html' %}
+
+{% load floppyforms %}
+
+{% block pre_body %}
+{% endblock pre_body %}
+
+{% block header_area %}
+{% endblock header_area %}
+
+{% block post_body %}
+{% endblock post_body %}
+
+{% block content %}
+
+  <section class="content-one content-padding" id="content-one">
+    <div class="container container-padding">
+      <div class="row">
+
+        <div class="col-lg-2">
+        </div>
+
+        <div class="col-lg-6">
+          <h2>User information</h2>
+          <form method='post' enctype="multipart/form-data">{% csrf_token %}
+            
+            {{ form }}
+
+            <p><br/><br/><br/></p>
+            <div class="bottom-fix-menu" align="center">
+              <h1>Contact Us
+                <input type="submit" class="btn btn-lg btn-success" value="Save" />
+                <a href="{% url 'flexcontent.windows_close' %}" class="btn btn-lg btn-danger" role="button" >Cancel</a>
+              </h1>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
+
+{% block footer_area %}
+{% endblock footer_area %}

@@ -1,0 +1,59 @@
+{% extends 'contactuspage/base_contacts.html' %}
+
+{% load floppyforms %}
+
+{% block content %}
+
+<section class="dark-bg section-padding" id="topicCreate">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1></h1>
+      </div>
+
+      <div class="col-md-12">
+        <table class="table">
+          <caption>Contact Topics</caption>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Subject</th>
+              <th>From</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for object in object_list %}
+              
+              <tr>
+                <td>
+                  {% if object.status == '0' %}<strong>{% endif %}
+                  {{ object.status_verbose }}
+                  {% if object.status == '0' %}</strong>{% endif %}
+                </td>
+                <td>
+                  {% if object.status == '0' %}<strong>{% endif %}
+                  <a href="{{ object.messages_url }}">{{ object }}</a> 
+                  <span class="badge">{{ object.message__count }}</span>
+                  <small> {{ object.last_update|timesince }}</small>
+                  {% if object.status == '0' %}</strong>{% endif %}
+                </td>
+                <td>{{ object.author.first_name }}</td>
+                <td>{{ object.created|timesince }}</td>
+              </tr>
+              
+            {% endfor %}
+          </tbody>
+        </table>        
+      </div>
+
+
+    </div>
+  </div>
+
+</section>
+
+
+
+{% endblock %}

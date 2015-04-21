@@ -1,0 +1,12 @@
+<!-- show_contacts_messages_tag -->
+
+{% if is_contactus_admin %}
+<section class="main-notification" id="main-notification">
+  <div>
+    <i class="fa fa-comments-o" style="font-size: 28px;"></i>
+    <a href="{% url 'contacts.topic.full_list' %}" style="color: #fff">
+      <span class="text animated {% if messages %}pulse{% endif %} infinite delay-04s">{{ messages }}</span>
+    </a>
+  </div>
+</section>
+{% endif %}

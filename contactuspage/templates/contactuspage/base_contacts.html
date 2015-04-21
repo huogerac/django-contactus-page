@@ -1,0 +1,8 @@
+{% extends 'themes/sydney/base.html' %}
+
+{% block js_top %}
+    <!-- # django-floppyforms -->
+    {{ block.super }}
+    {{ form.media }}
+{% endblock %}
+

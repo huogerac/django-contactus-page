@@ -1,0 +1,70 @@
+{% extends 'contactuspage/base_contacts.html' %}
+
+{% load floppyforms %}
+
+{% block content %}
+
+<section class="dark-bg section-padding" id="topicCreate">
+
+  <div class="container">
+    <div class="row">
+      {% with object_list.0.topic as topic %}
+      <div class="col-md-12">
+        {% if is_contactus_admin %}
+        <p>
+          <a class="btn btn-default" href="{% url 'contacts.topic.full_list' %}">Back</a>
+        </p>
+        {% endif %}
+        <h1>{{ topic.subject }} <small>From {{ topic.author.first_name }} ({{ topic.author.email}}) </small>
+        {% if is_contactus_admin %}
+          <span class="pull-right">
+            <form action="{% url 'contacts.topic.close' topic.id %}" method='post' enctype="multipart/form-data">  {% csrf_token %}
+              <input name="status" required="" id="id_status" type="hidden" value="2" />
+              <input type="submit" class="btn btn-danger" value="Close this topic" />
+            </form>
+          </span>
+        {% endif %}
+        </h1>
+        <span>{{ topic.created|timesince }} ago</span>
+      </div>
+
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <form action="{{ topic.reply_url }}" method='post' enctype="multipart/form-data">{% csrf_token %}
+            {{ reply_form }}
+
+            {% if is_contactus_admin %}
+            <input type="submit" class="btn btn-success" value="Reply" />
+            {% else %}
+            <input type="submit" class="btn btn-success" value="Post a new message" />
+            {% endif%}
+        </form>
+      </div>
+      <div class="col-md-2"></div>
+      {% endwith %}
+
+    </div>
+
+    <div class="row">
+
+      {% for object in object_list %}
+      <div class="row">
+        <div class="col-md-2">
+          <p>{{ object.author.first_name }}</p>
+        </div>
+        <div class="col-md-8">
+          <p>{{ object.message|linebreaksbr }}</p>          
+        </div>
+        <div class="col-md-2">
+          <p><small>{{ object.created}}</small></p>
+        </div>
+      </div>
+      {% endfor %}
+      
+    </div>
+
+
+  </div>
+</section>
+
+{% endblock %}
