@@ -8,8 +8,8 @@ django-contactus-page
 .. image:: https://travis-ci.org/DjenieLabs/django-contactus-page.png?branch=master
     :target: https://travis-ci.org/DjenieLabs/django-contactus-page
 
-.. image:: https://travis-ci.org/DjenieLabs/django-contactus-page.svg?branch=master
-    :target: https://travis-ci.org/DjenieLabs/django-contactus-page
+.. image:: https://coveralls.io/repos/huogerac/django-contactus-page/badge.png?branch=master
+    :target: https://coveralls.io/r/huogerac/django-contactus-page?branch=master
 
 A pluggable app for creating a contact us page
 

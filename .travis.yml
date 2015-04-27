@@ -15,7 +15,6 @@ install:
 script:
   - python contactuspagedemoapp/manage.py syncdb --noinput
   - python contactuspagedemoapp/manage.py test contactuspagedemo
-#- coverage run --source contactuspage runtests.py
 
 # report coverage to coveralls.io
-#after_success: coveralls
+after_success: coveralls

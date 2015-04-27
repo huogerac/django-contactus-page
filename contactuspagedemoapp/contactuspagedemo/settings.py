@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'floppyforms',
     'south',
+    'django_nose',
     'contactuspage',
 )
 
@@ -104,3 +105,12 @@ TEMPLATE_LOADERS = (
 TEMPLATE_DIRS = (
     normpath(join(BASE_DIR, 'templates')),
 )
+
+# Use nose to run all tests
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+# Apps which nose to measure coverage on
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=contactuspage',
+]
