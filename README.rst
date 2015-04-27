@@ -5,8 +5,8 @@ django-contactus-page
 .. image:: https://badge.fury.io/py/django-contactus-page.png
     :target: https://badge.fury.io/py/django-contactus-page
 
-.. image:: https://travis-ci.org/huogerac/django-contactus-page.png?branch=master
-    :target: https://travis-ci.org/huogerac/django-contactus-page
+.. image:: https://travis-ci.org/DjenieLabs/django-contactus-page.png?branch=master
+    :target: https://travis-ci.org/DjenieLabs/django-contactus-page
 
 .. image:: https://coveralls.io/repos/huogerac/django-contactus-page/badge.png?branch=master
     :target: https://coveralls.io/r/huogerac/django-contactus-page?branch=master

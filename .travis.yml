@@ -12,7 +12,8 @@ install:
   - pip install -r requirements-test.txt
 
 # command to run tests using coverage, e.g. python setup.py test
-script: 
+script:
+  - python contactuspagedemoapp/manage.py syncdb --noinput
   - python contactuspagedemoapp/manage.py test contactuspagedemo
 #- coverage run --source contactuspage runtests.py
 
