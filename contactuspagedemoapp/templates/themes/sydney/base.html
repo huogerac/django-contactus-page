@@ -1,0 +1,127 @@
+{% load static %}
+
+<!-- themes/sydney -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>{% block title %}{% endblock %}</title>
+
+      {% block 3rdcss %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+      {% endblock 3rdcss %}
+
+      {% block css %}
+      
+      {% endblock css %}
+
+      <!--  USE THE extracss BLOCK to add CSS here -->
+      {% block extracss %}
+      {% endblock extracss %}
+        
+      <!--  USE THE js_top BLOCK to add javascripts here -->
+      {% block js_top %}
+        <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+      {% endblock %}        
+        
+    </head>
+    
+    <!--  USE THE body BLOCK to override all the body -->
+    {% block body %}
+      <body id="top">
+
+        <!--  USE THE pre_body BLOCK to add content here -->
+        {% block pre_body %}
+        {% endblock pre_body %}
+
+        <!--  USE THE header_area BLOCK to add content here -->
+        {% block header_area %}
+
+          <!--  USE THE pre_navbar BLOCK to add content here -->
+          {% block pre_navbar %}
+          {% endblock pre_navbar %}
+          <!--  USE THE navbar BLOCK to add content here -->
+          {% block navbar %}
+          {% endblock navbar %}
+          <!--  USE THE post_navbar BLOCK to add content here -->
+          {% block post_navbar %}
+          {% endblock post_navbar %}
+
+        {% endblock header_area %}
+
+        <!--  USE THE content_area BLOCK to add the MAIN CONTENT -->
+        {% block content_area %}
+
+          <!--  USE THE pre_content BLOCK to add content here -->
+          {% block pre_content %}
+          {% endblock pre_content %}
+
+          <!--  OR USE THE content BLOCK DIRECTLY -->
+          {% block content %}
+          {% endblock content %}
+
+          <!-- USE THE post_content BLOCK to add content here -->
+          {% block post_content %}
+          {% endblock post_content %}
+
+        {% endblock content_area %}
+
+        <!--  USE THE footer_area BLOCK to add content here -->
+        {% block footer_area %}
+
+            <!--  USE THE pre_footer BLOCK to add content here -->
+            {% block pre_footer %}          
+
+            {% endblock pre_footer %}
+
+            <!--  USE THE footer BLOCK to add content here -->
+            {% block footer %}
+
+              <footer class="footer">
+                <div class="container">
+                  
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p class="text-muted">Copyright © Aussie Sites 2014 - <a href="">Builds</a></p>
+                    </div>
+                    <div class="col-md-6 credit">
+                      <p>Magically created by <a href="http://www.djenie.com/">Djenie</a></p>
+                    </div>
+                  </div>
+
+                </div>
+              </footer>
+
+            {% endblock footer %}
+
+            <!--  USE THE post_footer BLOCK to add content here -->
+            {% block post_footer %}
+            {% endblock post_footer %}  
+
+        {% endblock footer_area %}
+
+        <!--  USE THE post_body BLOCK to add content here -->
+        {% block post_body %}
+        {% endblock post_body %}
+
+        {% block 3rdjs %}
+
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        {% endblock 3rdjs %}
+
+        {% block js %}
+
+        {% endblock js %}
+
+        <!--  USE THE extrajs BLOCK to add extra javascripts here -->
+        {% block extrajs %}
+        {% endblock extrajs %}        
+
+      </body>
+    {% endblock body %}
+
+</html>

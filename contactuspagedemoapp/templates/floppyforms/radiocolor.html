@@ -1,0 +1,16 @@
+<!-- floppyforms/radiocolor.html -->
+<div class="row radioicon" id="{{ attrs.id }}">
+  <div data-toggle="buttons">
+    {% for group_name, choices in optgroups %}
+      {% for choice in choices %}
+        <label class="btn col-md-6 radioicon-label{% if choice.0 in value %} active{% endif %} {% if '(dark)' in choice.1 %}dark{% else %}light{% endif %}">
+          <div class="radioicon-control">
+            <img width="222" src="/static/colors/{{ choice.0 }}.jpg" class="{{ choice.0 }}">
+            <input type="radio" class="icon_selector" id="{{ attrs.id }}_{{ forloop.counter }}" value="{{ choice.0 }}" name="{{ name }}"{% if required %} required{% endif %}{% if choice.0 in value %} checked{% endif %}>
+            <p>{{ choice.1 }}</p>
+          </div>
+        </label>
+      {% endfor %}
+    {% endfor %}
+  </div>
+</div>

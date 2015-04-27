@@ -1,0 +1,8 @@
+{% extends 'themes/sydney/base.html' %}
+
+{% block content %}
+
+  <h1> <small> (VISITORS) --></small><a href="{% url 'contacts.topic.create' %}">Create contact</a></h1>
+  <h1> <small> (ADMIN)    --></small><a href="{% url 'contacts.topic.full_list' %}">List all contacts</a></h1>
+
+{% endblock content %}
