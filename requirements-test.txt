@@ -1,6 +1,7 @@
 # App 
 django>=1.6.11
 django-floppyforms==1.2.0
+-e git://github.com/DjenieLabs/django-multisites-utils.git#egg=django-multisites-utils
 -e git://github.com/DjenieLabs/django-contactus-page.git#egg=django-contactus-page
 
 # Test
